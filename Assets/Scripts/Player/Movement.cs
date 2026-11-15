@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
     [SerializeField] private float speed;
+    [SerializeField] private bool isGrounded;
 
     private void Awake()
     {
@@ -25,9 +27,20 @@ public class Movement : MonoBehaviour
 
     private void PlayerMove()
     {
-        Vector3 move = new(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        characterController.Move(speed * Time.deltaTime * move);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * horizontal +
+                       transform.forward * vertical;
+
+        characterController.Move(move * speed * Time.deltaTime);
+
+        
+
+
     }
+
+    
 
 
 
