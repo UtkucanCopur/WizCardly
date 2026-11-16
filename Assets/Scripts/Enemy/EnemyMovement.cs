@@ -23,7 +23,11 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.SetDestination(player.transform.position);
             timer = updateInterval;
+            
         }
     }
+
+    public void SetSpeed(float amount) => agent.speed = amount;
+
 
 }

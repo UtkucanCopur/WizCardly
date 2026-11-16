@@ -4,17 +4,21 @@ using UnityEngine.InputSystem;
 public class Attack : MonoBehaviour
 {
     
-    [SerializeField] private ParticleSystem particle;
     [SerializeField] private Camera fpsCamera;
     [SerializeField] private float range;
     [SerializeField] private float damage;
     [SerializeField] private int currentBulletIndex;
+    [SerializeField] private GameObject currentWeapon;
 
 
-
-    private void Awake()
+    private void OnEnable()
     {
-        
+        GameEvents.OnWeaponChanged += GetCurrentWeapon;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnWeaponChanged -= GetCurrentWeapon;
     }
 
     private void Update()
@@ -26,7 +30,8 @@ public class Attack : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            particle.Play();
+            
+            currentWeapon.GetComponent<ParticleSystem>().Play();
             Ray ray = new Ray(fpsCamera.transform.position,fpsCamera.transform.forward);
             currentBulletIndex--;
             if (Physics.Raycast(ray, out RaycastHit hit, range))
@@ -35,6 +40,14 @@ public class Attack : MonoBehaviour
                 if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
                 {
                     damageable.TakeDamage(25);
+                    
+                    
+                }
+                if (hit.collider.TryGetComponent<EffectManager>(out EffectManager effectManager))
+                {
+                    string currentBulletType = currentWeapon.GetComponent<BulletManager>().GetBulletType();
+                    effectManager.HitEffect(currentBulletType);
+                    
                 }
             }
             if (currentBulletIndex <= 0)
@@ -48,6 +61,10 @@ public class Attack : MonoBehaviour
         }
 
     }
+
+    private void GetCurrentWeapon(GameObject weapon) => currentWeapon = weapon;
+
+    
 
     
     private void Reload()
