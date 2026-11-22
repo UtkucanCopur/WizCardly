@@ -33,7 +33,8 @@ public class EnemyMovement : MonoBehaviour
     {
         //player.GetComponent<PlayerStatManager>().TakeDamage(25);
         //player.GetComponent<PlayerStatManager>().ChangeSpeedValue(3f, false);
-        playerStatManager.ChangeVisual();
+        //playerStatManager.ChangeVisual();
+        playerStatManager.ChangeExpValue(10);
     }
 
     private void FollowPlayer()

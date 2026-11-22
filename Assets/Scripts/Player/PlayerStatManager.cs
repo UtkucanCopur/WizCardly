@@ -67,7 +67,7 @@ public class PlayerStatManager : MonoBehaviour, IDamageable
     {
         vignette.intensity.value = 0.55f;
         Invoke("ResetVisual", 2f);
-        //Change FOV
+        //create vignette effect
     }
 
     public void ResetVisual()
@@ -75,8 +75,10 @@ public class PlayerStatManager : MonoBehaviour, IDamageable
         vignette.intensity.value = 0f;
     }
 
-    public void ChangeExpValue()
+    public void ChangeExpValue(float amount)
     {
+        playerData.exp -= amount;
+        playerData.exp = Mathf.Clamp(playerData.exp,0,playerData.maxExp);
         //Add or remove exp 
     }
 
