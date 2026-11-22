@@ -34,7 +34,8 @@ public class EnemyMovement : MonoBehaviour
         //player.GetComponent<PlayerStatManager>().TakeDamage(25);
         //player.GetComponent<PlayerStatManager>().ChangeSpeedValue(3f, false);
         //playerStatManager.ChangeVisual();
-        playerStatManager.ChangeExpValue(10);
+        //playerStatManager.ChangeExpValue(10);
+        //playerStatManager.ChangeDamageValue(10,false);
     }
 
     private void FollowPlayer()

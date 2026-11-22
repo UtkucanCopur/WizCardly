@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   speed: 5
-  visualRange: 70
   maxExp: 100
-  exp: 30
-  damage: 10
+  exp: 90
+  expMultiplier: 1
+  damage: 20

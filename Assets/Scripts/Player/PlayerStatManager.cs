@@ -52,7 +52,7 @@ public class PlayerStatManager : MonoBehaviour, IDamageable
 
     private void GainExp(float amount)
     {
-        playerData.exp += amount;
+        playerData.exp += amount * playerData.expMultiplier;
         CheckExp();
     }
     private void CheckExp()
@@ -82,8 +82,14 @@ public class PlayerStatManager : MonoBehaviour, IDamageable
         //Add or remove exp 
     }
 
-    public void ChangeDamageValue()
+    public void ChangeDamageValue(float amount, bool isPositive)
     {
+        if (isPositive)
+            playerData.damage += amount;
+        else
+            playerData.damage -= amount;
+
+        playerData.damage = Mathf.Clamp(playerData.damage, 0, 9999);
         //Increase or decrease damage value
     }
 
