@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] private PlayerData playerData;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private float speed;
     [SerializeField] private bool isGrounded;
@@ -33,7 +34,7 @@ public class Movement : MonoBehaviour
         Vector3 move = transform.right * horizontal +
                        transform.forward * vertical;
 
-        characterController.Move(move * speed * Time.deltaTime);
+        characterController.Move(move * playerData.speed * Time.deltaTime);
 
         
 

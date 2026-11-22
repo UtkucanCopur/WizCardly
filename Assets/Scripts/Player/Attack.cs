@@ -9,6 +9,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private int currentBulletIndex;
     [SerializeField] private GameObject currentWeapon;
+    [SerializeField] private PlayerData playerData;
 
 
     private void OnEnable()
@@ -20,6 +21,8 @@ public class Attack : MonoBehaviour
     {
         GameEvents.OnWeaponChanged -= GetCurrentWeapon;
     }
+
+    
 
     private void Update()
     {
@@ -39,7 +42,7 @@ public class Attack : MonoBehaviour
                 Debug.Log($"vurulan obje {hit.collider.name}");
                 if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(25);
+                    damageable.TakeDamage(playerData.damage);
                     
                     
                 }
