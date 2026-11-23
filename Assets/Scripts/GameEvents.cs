@@ -10,6 +10,7 @@ public class GameEvents : MonoBehaviour
     public static event Action<string> OnPowerUpSelected;
     public static event Action OnSniperRifleOpen;
     public static event Action OnUziOpen;
+    public static event Action OnFireRingOpen;
 
 
 
@@ -21,6 +22,10 @@ public class GameEvents : MonoBehaviour
 
 
 
+
+
+
+    public static void OpenFireRing() { OnFireRingOpen?.Invoke(); }
     public static void SniperRifleOpen() { OnSniperRifleOpen?.Invoke(); }
     public static void UziOpen() { OnUziOpen?.Invoke(); }
     public static void PowerUpSelected(string methodName) {  OnPowerUpSelected(methodName); }
