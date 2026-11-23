@@ -12055,7 +12055,7 @@ MonoBehaviour:
   - PowerUpType: Active
     Frame: {fileID: 21300000, guid: b73edda707c51ed40a9186017d036fc1, type: 3}
     PowerUpImage: {fileID: 21300000, guid: ce01a4b985aadb04e87bad1e86b71ce3, type: 3}
-    PowerUpInfo: "Ate\u015F halkas\u0131 bum"
+    PowerUpInfo: 'Send ring of fires '
     PowerUpIndex: 0
     methodName: RingOfFire
   - PowerUpType: Passive
@@ -12067,9 +12067,33 @@ MonoBehaviour:
   - PowerUpType: Gun
     Frame: {fileID: 21300000, guid: fd20519c4458bfa47ab4ae81042dbe56, type: 3}
     PowerUpImage: {fileID: 21300000, guid: 6517036e8a4b7fd48b6606d60f6a485c, type: 3}
-    PowerUpInfo: "Buzlu awp ald\u0131n bum be yarak"
+    PowerUpInfo: Get sniper rifle with ice bullets
     PowerUpIndex: 2
     methodName: GetAwp
+  - PowerUpType: Passive
+    Frame: {fileID: 21300000, guid: 6d500b3ed61185044a07e8b546b3e335, type: 3}
+    PowerUpImage: {fileID: 21300000, guid: 3bd96d472861094418ef7d3004e626d4, type: 3}
+    PowerUpInfo: Increase damage
+    PowerUpIndex: 3
+    methodName: IncreaseAttackValue
+  - PowerUpType: Passive
+    Frame: {fileID: 21300000, guid: 6d500b3ed61185044a07e8b546b3e335, type: 3}
+    PowerUpImage: {fileID: 21300000, guid: bd68d4991c6092a4da61a57f505f8b7f, type: 3}
+    PowerUpInfo: Increase exp multiplier
+    PowerUpIndex: 4
+    methodName: IncreaseExpMultiplier
+  - PowerUpType: Passive
+    Frame: {fileID: 21300000, guid: 6d500b3ed61185044a07e8b546b3e335, type: 3}
+    PowerUpImage: {fileID: 21300000, guid: 5a1dd9e7dcc63144fb1ac6c72b422ebe, type: 3}
+    PowerUpInfo: Increase move speed
+    PowerUpIndex: 5
+    methodName: IncreaseSpeed
+  - PowerUpType: Gun
+    Frame: {fileID: 21300000, guid: fd20519c4458bfa47ab4ae81042dbe56, type: 3}
+    PowerUpImage: {fileID: 21300000, guid: 24b13ab18687bc041b521a8f09258e3b, type: 3}
+    PowerUpInfo: Get uzi with lightning bullets
+    PowerUpIndex: 6
+    methodName: GetUzi
   currentPowerUps:
   - 
   - 

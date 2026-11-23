@@ -7,6 +7,23 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private GameObject currentWeapon;
     [SerializeField] private GameObject lastWeapon;
 
+
+    private void OnEnable()
+    {
+        GameEvents.OnSniperRifleOpen += OpenSniperRifle;
+        GameEvents.OnUziOpen += OpenUzi;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnSniperRifleOpen -= OpenSniperRifle;
+        GameEvents.OnUziOpen -= OpenUzi;
+    }
+
+
+    private bool isSniperRifleOpen;
+    private bool isUziOpen;
+
     private void Awake()
     {
         currentWeapon = weaponArray[0];
@@ -23,7 +40,7 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.SetActive(true);
             GameEvents.ChangeWeapon(currentWeapon);
         }
-        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        if (Keyboard.current.digit2Key.wasPressedThisFrame && isSniperRifleOpen)
         {
             lastWeapon = currentWeapon;
             lastWeapon.SetActive(false);
@@ -32,7 +49,7 @@ public class WeaponManager : MonoBehaviour
             GameEvents.ChangeWeapon(currentWeapon);
 
         }
-        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        if (Keyboard.current.digit3Key.wasPressedThisFrame && isUziOpen)
         {
             lastWeapon = currentWeapon;
             lastWeapon.SetActive(false);
@@ -43,6 +60,9 @@ public class WeaponManager : MonoBehaviour
         }
 
     }
+
+    private void OpenSniperRifle() => isSniperRifleOpen = true;
+    private void OpenUzi() => isUziOpen = true;
 
 
 

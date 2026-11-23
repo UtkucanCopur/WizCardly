@@ -22,10 +22,15 @@ public class PowerUpManager : MonoBehaviour
 
     private void Awake()
     {
+        //PASSIVES
         powerUpMethods.Add("IncreaseAttackValue", IncreaseAttackValue);
         powerUpMethods.Add("IncreaseMaxHealth", IncreaseMaxHealth);
         powerUpMethods.Add("IncreaseSpeed", IncreaseSpeed);
         powerUpMethods.Add("IncreaseExpMultiplier", IncreaseExpMultiplier);
+        
+        //GUNS
+        powerUpMethods.Add("GetAwp", GetAwp);
+        powerUpMethods.Add("GetUzi", GetUzi);
     }
 
     private void ApplyPowerUp(string methodName)
@@ -39,6 +44,13 @@ public class PowerUpManager : MonoBehaviour
             Debug.LogWarning("PowerUp bulunamadı: " + methodName);
         }
     }
+
+
+
+
+    public void GetAwp() => GameEvents.SniperRifleOpen();
+    public void GetUzi() => GameEvents.UziOpen();
+    
 
     public void IncreaseAttackValue()
     {
@@ -61,7 +73,7 @@ public class PowerUpManager : MonoBehaviour
 
     public void IncreaseExpMultiplier()
     {
-        playerData.expMultiplier += .5f;
+        playerData.expMultiplier += .2f;
         playerData.expMultiplier = Mathf.Clamp(playerData.expMultiplier, 1f, 5f);
     }
 
