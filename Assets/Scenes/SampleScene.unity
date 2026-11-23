@@ -6341,7 +6341,6 @@ GameObject:
   m_Component:
   - component: {fileID: 571051639}
   - component: {fileID: 571051638}
-  - component: {fileID: 571051637}
   m_Layer: 0
   m_Name: PowerUpManager
   m_TagString: Untagged
@@ -6349,25 +6348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &571051637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571051636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0967efba1dfec2d4bb79504b6d99cf3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
-  PowerUpFrames: []
-  ActivePowerUpImages: []
-  ActivePowerUpInfo: []
-  PassivePowerUpImages: []
-  PassivePowerUpInfo: []
-  GunPowerUpImages: []
-  GunPowerUpInfo: []
 --- !u!114 &571051638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6381,8 +6361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpManager
   playerData: {fileID: 11400000, guid: f07f8ef780d7a0640872bea9ec01564e, type: 2}
-  powerUpData: {fileID: 571051637}
-  powerUpTypes: 0
+  manager: {fileID: 860512439}
 --- !u!4 &571051639
 Transform:
   m_ObjectHideFlags: 0
@@ -12064,10 +12043,37 @@ MonoBehaviour:
   - {fileID: 1595482553}
   - {fileID: 1567594098}
   - {fileID: 953549788}
-  powerUpButtonFrames:
-  - {fileID: 21300000, guid: b73edda707c51ed40a9186017d036fc1, type: 3}
-  - {fileID: 21300000, guid: fd20519c4458bfa47ab4ae81042dbe56, type: 3}
-  - {fileID: 21300000, guid: 6d500b3ed61185044a07e8b546b3e335, type: 3}
+  powerUpInfo:
+  - {fileID: 1126258729}
+  - {fileID: 775710132}
+  - {fileID: 702018945}
+  powerUpImages:
+  - {fileID: 663135190}
+  - {fileID: 589139734}
+  - {fileID: 61985700}
+  powerUps:
+  - PowerUpType: Active
+    Frame: {fileID: 21300000, guid: b73edda707c51ed40a9186017d036fc1, type: 3}
+    PowerUpImage: {fileID: 21300000, guid: ce01a4b985aadb04e87bad1e86b71ce3, type: 3}
+    PowerUpInfo: "Ate\u015F halkas\u0131 bum"
+    PowerUpIndex: 0
+    methodName: RingOfFire
+  - PowerUpType: Passive
+    Frame: {fileID: 21300000, guid: 6d500b3ed61185044a07e8b546b3e335, type: 3}
+    PowerUpImage: {fileID: 21300000, guid: 86d4fd59babb1cf4b8f2429f4c61d07e, type: 3}
+    PowerUpInfo: "Can\u0131n artt\u0131 bum be"
+    PowerUpIndex: 1
+    methodName: IncreaseMaxHealth
+  - PowerUpType: Gun
+    Frame: {fileID: 21300000, guid: fd20519c4458bfa47ab4ae81042dbe56, type: 3}
+    PowerUpImage: {fileID: 21300000, guid: 6517036e8a4b7fd48b6606d60f6a485c, type: 3}
+    PowerUpInfo: "Buzlu awp ald\u0131n bum be yarak"
+    PowerUpIndex: 2
+    methodName: GetAwp
+  currentPowerUps:
+  - 
+  - 
+  - 
 --- !u!4 &860512440
 Transform:
   m_ObjectHideFlags: 0
@@ -12095,6 +12101,7 @@ GameObject:
   - component: {fileID: 953549790}
   - component: {fileID: 953549789}
   - component: {fileID: 953549788}
+  - component: {fileID: 953549791}
   m_Layer: 5
   m_Name: PowerUp3
   m_TagString: Untagged
@@ -12168,9 +12175,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1600385803}
+      - m_Target: {fileID: 953549791}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: ClosePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 953549791}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: SelectedButtonIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12218,6 +12237,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953549786}
   m_CullTransparentMesh: 1
+--- !u!114 &953549791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953549786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f7e3a9345d905468fbe0921e430813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
+  levelUpPanel: {fileID: 2107542784}
+  buttonIndex: 2
 --- !u!1 &968998023
 GameObject:
   m_ObjectHideFlags: 0
@@ -17734,6 +17767,7 @@ GameObject:
   - component: {fileID: 1567594100}
   - component: {fileID: 1567594099}
   - component: {fileID: 1567594098}
+  - component: {fileID: 1567594101}
   m_Layer: 5
   m_Name: PowerUp2
   m_TagString: Untagged
@@ -17807,9 +17841,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1600385803}
+      - m_Target: {fileID: 1567594101}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: ClosePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1567594101}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: SelectedButtonIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17857,6 +17903,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567594096}
   m_CullTransparentMesh: 1
+--- !u!114 &1567594101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567594096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f7e3a9345d905468fbe0921e430813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
+  levelUpPanel: {fileID: 2107542784}
+  buttonIndex: 1
 --- !u!1 &1595482551
 GameObject:
   m_ObjectHideFlags: 0
@@ -17869,6 +17929,7 @@ GameObject:
   - component: {fileID: 1595482555}
   - component: {fileID: 1595482554}
   - component: {fileID: 1595482553}
+  - component: {fileID: 1595482556}
   m_Layer: 5
   m_Name: PowerUp1
   m_TagString: Untagged
@@ -17942,9 +18003,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1600385803}
+      - m_Target: {fileID: 1595482556}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: ClosePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1595482556}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: SelectedButtonIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17992,51 +18065,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595482551}
   m_CullTransparentMesh: 1
---- !u!1 &1600385802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1600385804}
-  - component: {fileID: 1600385803}
-  m_Layer: 0
-  m_Name: ButtonManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1600385803
+--- !u!114 &1595482556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600385802}
+  m_GameObject: {fileID: 1595482551}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50f7e3a9345d905468fbe0921e430813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
   levelUpPanel: {fileID: 2107542784}
---- !u!4 &1600385804
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600385802}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -970.53436, y: 0.00002, z: 10940.816}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  buttonIndex: 0
 --- !u!1 &1810747634
 GameObject:
   m_ObjectHideFlags: 0
@@ -40671,8 +40713,7 @@ SceneRoots:
   - {fileID: 817743901}
   - {fileID: 532884118}
   - {fileID: 1997655087}
-  - {fileID: 1600385804}
+  - {fileID: 571051639}
   - {fileID: 860512440}
   - {fileID: 543450652743701676}
   - {fileID: 3871319271207212732}
-  - {fileID: 571051639}

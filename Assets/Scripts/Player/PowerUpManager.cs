@@ -1,61 +1,67 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PowerUpManager : MonoBehaviour
 {
-    
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private UIManager manager;
+    [SerializeField] private Dictionary<string, Action> powerUpMethods = new Dictionary<string, Action>();
 
-    public enum PowerUpTypes
+
+    private void OnEnable()
     {
-        ACTIVE,
-        PASSIVE,
-        GUN
-
+        GameEvents.OnPowerUpSelected += ApplyPowerUp;
+    }
+    private void OnDisable()
+    {
+        GameEvents.OnPowerUpSelected -= ApplyPowerUp;
     }
 
 
-    [SerializeField] private PlayerData playerData;
-    [SerializeField] private PowerUpData powerUpData;
-    [SerializeField] private PowerUpTypes powerUpTypes;
-
-    public void RandomPowerUpSelector()
+    private void Awake()
     {
-        switch (powerUpTypes)
+        powerUpMethods.Add("IncreaseAttackValue", IncreaseAttackValue);
+        powerUpMethods.Add("IncreaseMaxHealth", IncreaseMaxHealth);
+        powerUpMethods.Add("IncreaseSpeed", IncreaseSpeed);
+        powerUpMethods.Add("IncreaseExpMultiplier", IncreaseExpMultiplier);
+    }
+
+    private void ApplyPowerUp(string methodName)
+    {
+        if (powerUpMethods.TryGetValue(methodName, out Action method))
         {
-            case PowerUpTypes.ACTIVE:
-                int rand = Random.Range(0, powerUpData.ActivePowerUpImages.Length);
-                break;
-            case PowerUpTypes.PASSIVE:
-                break;
-            case PowerUpTypes.GUN:
-                break;
-            default:
-                break;
+            method.Invoke();
+        }
+        else
+        {
+            Debug.LogWarning("PowerUp bulunamadı: " + methodName);
         }
     }
 
-    public void IncreaseAttackValue(float amount)
+    public void IncreaseAttackValue()
     {
-        playerData.damage += amount;
+        playerData.damage += 5;
         playerData.damage = Mathf.Clamp(playerData.damage, 0f, 9999);
     }
 
-    public void IncreaseMaxHealth(float amount)
+    public void IncreaseMaxHealth()
     {
-        playerData.maxHealth += amount;
-        playerData.health += amount;
+        playerData.maxHealth += 10;
+        playerData.health += 10;
         playerData.health = Mathf.Clamp(playerData.health, 0f, playerData.maxHealth);
     }
 
-    public void IncreaseSpeed(float amount)
+    public void IncreaseSpeed()
     {
-        playerData.speed += amount;
+        playerData.speed += 1f;
         playerData.speed = Mathf.Clamp(playerData.speed, 0f, 10f);
     }
 
-    public void IncreaseExpMultiplier(float amount)
+    public void IncreaseExpMultiplier()
     {
-        playerData.expMultiplier += amount;
+        playerData.expMultiplier += .5f;
         playerData.expMultiplier = Mathf.Clamp(playerData.expMultiplier, 1f, 5f);
     }
 

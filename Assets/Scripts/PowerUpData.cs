@@ -1,16 +1,18 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 
 [Serializable]
-public class PowerUpData : MonoBehaviour
+public class PowerUpData
 {
-    public Image[] PowerUpFrames;
-    public Image[] ActivePowerUpImages;
-    public string[] ActivePowerUpInfo;
-    public Image[] PassivePowerUpImages;
-    public string[] PassivePowerUpInfo;
-    public Image[] GunPowerUpImages;
-    public string[] GunPowerUpInfo;
+    public string PowerUpType;
+    public Sprite Frame;
+    public Sprite PowerUpImage;
+    public string PowerUpInfo;
+    public int PowerUpIndex;
+    public string methodName;
 }
+
+
+

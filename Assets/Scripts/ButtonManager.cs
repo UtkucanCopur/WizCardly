@@ -4,7 +4,7 @@ public class ButtonManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject levelUpPanel;
-
+    [SerializeField] private int buttonIndex;
 
     public void ClosePanel()
     {
@@ -13,4 +13,11 @@ public class ButtonManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+
+    public void SelectedButtonIndex()
+    {
+        GameEvents.ButtonSelected(buttonIndex);
+    }
+
 }
