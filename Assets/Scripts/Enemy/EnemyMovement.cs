@@ -6,37 +6,18 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject player;
     [SerializeField] private float updateInterval;
-    [SerializeField] private Animator animator;
-    [SerializeField] private PlayerStatManager playerStatManager;
+    [SerializeField] private EnemyAttackManager attackManager;
 
     private float timer;
 
-    private void Awake()
-    {
-        playerStatManager = player.GetComponent<PlayerStatManager>();
-    }
+    
 
     private void Update()
     {
         FollowPlayer();
     }
 
-    public void KickStart() => animator.SetBool("isKicking", true);
-    public void KickEnd()
-    {
-        agent.speed = 3.5f;
-        Debug.Log("player uzakta");
-        animator.SetBool("isKicking", false);
-    }
-
-    public void KickPlayer()
-    {
-        //player.GetComponent<PlayerStatManager>().TakeDamage(25);
-        //player.GetComponent<PlayerStatManager>().ChangeSpeedValue(3f, false);
-        //playerStatManager.ChangeVisual();
-        //playerStatManager.ChangeExpValue(10);
-        //playerStatManager.ChangeDamageValue(10,false);
-    }
+    
 
     private void FollowPlayer()
     {
@@ -51,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
             if (distance <= 3f)
             {
                 Debug.Log("player yakýnda");
-                KickStart();
+                attackManager.AttackPlayer();
                 agent.speed = 0f;
             }
              

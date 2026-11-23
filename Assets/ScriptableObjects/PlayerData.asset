@@ -16,6 +16,6 @@ MonoBehaviour:
   health: 100
   speed: 5
   maxExp: 100
-  exp: 90
+  exp: 140
   expMultiplier: 1
   damage: 20
