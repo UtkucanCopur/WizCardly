@@ -7,10 +7,17 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float updateInterval;
     [SerializeField] private EnemyAttackManager attackManager;
-
+    [SerializeField] private EnemyAttackManager.EnemyTypes type;
     private float timer;
 
-    
+
+
+
+
+    private void Awake()
+    {
+        type = GetComponent<EnemyAttackManager>().enemyType;
+    }
 
     private void Update()
     {
@@ -29,9 +36,15 @@ public class EnemyMovement : MonoBehaviour
             timer = updateInterval;
             
             float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance <= 3f)
+            if (distance <= 3f && type != EnemyAttackManager.EnemyTypes.MAGE)
             {
                 Debug.Log("player yakýnda");
+                attackManager.AttackPlayer();
+                agent.speed = 0f;
+            }
+
+            if (distance <= 20f && type == EnemyAttackManager.EnemyTypes.MAGE)
+            {
                 attackManager.AttackPlayer();
                 agent.speed = 0f;
             }

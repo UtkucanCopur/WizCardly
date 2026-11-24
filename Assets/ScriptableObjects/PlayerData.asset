@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   maxHealth: 100
-  health: 100
+  health: 0
   speed: 5
   maxExp: 100
-  exp: 260
+  exp: 100
   expMultiplier: 1
   damage: 20

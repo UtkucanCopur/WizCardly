@@ -7,7 +7,9 @@ public class EnemyAttackManager : MonoBehaviour
     public enum EnemyTypes
     {
         ALIEN,
-        MINATOUR
+        MINATOUR,
+        ORC,
+        MAGE
     }
 
 
@@ -15,7 +17,9 @@ public class EnemyAttackManager : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject player;
     [SerializeField] private PlayerStatManager playerStatManager;
-    [SerializeField] private EnemyTypes enemyType;
+    [SerializeField] private GameObject fireBall;
+
+    public EnemyTypes enemyType;
 
     private void Awake()
     {
@@ -46,6 +50,15 @@ public class EnemyAttackManager : MonoBehaviour
                 player.GetComponent<PlayerStatManager>().TakeDamage(10);
                 AttackStart();
                 break;
+            case EnemyTypes.ORC:
+                player.GetComponent<PlayerStatManager>().TakeDamage(15);
+                AttackStart();
+                break;
+            case EnemyTypes.MAGE:
+                player.GetComponent<PlayerStatManager>().TakeDamage(20);
+                fireBall.GetComponent<FireBall>().Launch();
+                AttackStart();
+                break;
             default:
                 break;
         }
@@ -59,6 +72,7 @@ public class EnemyAttackManager : MonoBehaviour
     }
 
     public void MinatourAttackPower() => playerStatManager.ChangeVisual();
-
+    public void OrcAttackPower() => playerStatManager.ChangeSpeedValue(1f, false);
+    public void MageAttackPower() => playerStatManager.ChangeExpValue(20);
 
 }
