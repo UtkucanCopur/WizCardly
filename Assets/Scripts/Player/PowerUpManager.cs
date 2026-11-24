@@ -31,6 +31,7 @@ public class PowerUpManager : MonoBehaviour
         //GUNS
         powerUpMethods.Add("GetAwp", GetAwp);
         powerUpMethods.Add("GetUzi", GetUzi);
+        powerUpMethods.Add("GetBazooka", GetBazooka);
 
         //ACTIVES
         powerUpMethods.Add("GetFireRing", GetFireRing);
@@ -55,6 +56,7 @@ public class PowerUpManager : MonoBehaviour
     public void GetFireRing() => GameEvents.OpenFireRing();
     public void GetAwp() => GameEvents.SniperRifleOpen();
     public void GetUzi() => GameEvents.UziOpen();
+    public void GetBazooka() => GameEvents.OpenBazooka();
     
 
     public void IncreaseAttackValue()

@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image[] powerUpImages;
     [SerializeField] private PowerUpData[] powerUps;
     [SerializeField] private string[] currentPowerUps;
+    [SerializeField] private GameObject mageEffect;
 
 
 
@@ -21,14 +22,23 @@ public class UIManager : MonoBehaviour
         GameEvents.OnLevelUp += OpenLevelUpPanel;
         GameEvents.OnLevelUp += ButtonFrameSelector;
         GameEvents.OnButtonSelected += GetPowerUpName;
+        GameEvents.OnMageEffectActive += OpenMageEffect;
     }
 
     private void OnDisable()
     {
+        GameEvents.OnMageEffectActive -= OpenMageEffect;
         GameEvents.OnLevelUp -= OpenLevelUpPanel;
         GameEvents.OnLevelUp -= ButtonFrameSelector;
         GameEvents.OnButtonSelected -= GetPowerUpName;
     }
+
+    private void OpenMageEffect()
+    {
+        mageEffect.SetActive(true);
+        Invoke("CloseMageEffect", .3f);
+    }
+    private void CloseMageEffect() => mageEffect.SetActive(false);
 
     
 

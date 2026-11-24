@@ -17,7 +17,6 @@ public class EnemyAttackManager : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject player;
     [SerializeField] private PlayerStatManager playerStatManager;
-    [SerializeField] private GameObject fireBall;
 
     public EnemyTypes enemyType;
 
@@ -47,16 +46,15 @@ public class EnemyAttackManager : MonoBehaviour
                 AttackStart();
                 break;
             case EnemyTypes.MINATOUR:
-                player.GetComponent<PlayerStatManager>().TakeDamage(10);
                 AttackStart();
                 break;
             case EnemyTypes.ORC:
-                player.GetComponent<PlayerStatManager>().TakeDamage(15);
+                
                 AttackStart();
                 break;
             case EnemyTypes.MAGE:
-                player.GetComponent<PlayerStatManager>().TakeDamage(20);
-                fireBall.GetComponent<FireBall>().Launch();
+                
+                //fireBall.GetComponent<FireBall>().Launch();
                 AttackStart();
                 break;
             default:
@@ -71,8 +69,21 @@ public class EnemyAttackManager : MonoBehaviour
         //playerStatManager.ChangeDamageValue(10,false);
     }
 
-    public void MinatourAttackPower() => playerStatManager.ChangeVisual();
-    public void OrcAttackPower() => playerStatManager.ChangeSpeedValue(1f, false);
-    public void MageAttackPower() => playerStatManager.ChangeExpValue(20);
+    public void MinatourAttackPower()
+    {
+        playerStatManager.ChangeVisual();
+        player.GetComponent<PlayerStatManager>().TakeDamage(10);
+    }
+    public void OrcAttackPower()
+    {
+        playerStatManager.ChangeSpeedValue(1f, false);
+        player.GetComponent<PlayerStatManager>().TakeDamage(15);
+    }
+    public void MageAttackPower()
+    {
+        GameEvents.MageEffectActive();
+        playerStatManager.ChangeExpValue(20);
+        player.GetComponent<PlayerStatManager>().TakeDamage(20);
+    }
 
 }

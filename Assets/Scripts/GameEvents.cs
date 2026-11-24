@@ -11,6 +11,8 @@ public class GameEvents : MonoBehaviour
     public static event Action OnSniperRifleOpen;
     public static event Action OnUziOpen;
     public static event Action OnFireRingOpen;
+    public static event Action OnBazookaOpen;
+    public static event Action OnMageEffectActive;
 
 
 
@@ -25,6 +27,13 @@ public class GameEvents : MonoBehaviour
 
 
 
+
+
+
+
+
+    public static void MageEffectActive() { OnMageEffectActive?.Invoke(); }
+    public static void OpenBazooka() { OnBazookaOpen?.Invoke(); }
     public static void OpenFireRing() { OnFireRingOpen?.Invoke(); }
     public static void SniperRifleOpen() { OnSniperRifleOpen?.Invoke(); }
     public static void UziOpen() { OnUziOpen?.Invoke(); }

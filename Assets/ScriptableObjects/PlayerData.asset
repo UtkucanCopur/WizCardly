@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67bb5dee8317bfa49a8b41f52c6c7c8c, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  maxHealth: 100
-  health: 0
+  maxHealth: 110
+  health: 110
   speed: 5
   maxExp: 100
-  exp: 100
-  expMultiplier: 1
-  damage: 20
+  exp: 1e+9
+  expMultiplier: 1.8000002
+  damage: 25

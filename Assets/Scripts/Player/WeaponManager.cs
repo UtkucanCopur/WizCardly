@@ -8,21 +8,25 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private GameObject lastWeapon;
 
 
+    private bool isSniperRifleOpen;
+    private bool isUziOpen;
+    private bool isBazookaOpen;
+
     private void OnEnable()
     {
         GameEvents.OnSniperRifleOpen += OpenSniperRifle;
         GameEvents.OnUziOpen += OpenUzi;
+        GameEvents.OnBazookaOpen += OpenBazooka;
     }
 
     private void OnDisable()
     {
         GameEvents.OnSniperRifleOpen -= OpenSniperRifle;
         GameEvents.OnUziOpen -= OpenUzi;
+        GameEvents.OnBazookaOpen -= OpenBazooka;
     }
 
 
-    private bool isSniperRifleOpen;
-    private bool isUziOpen;
 
     private void Awake()
     {
@@ -58,11 +62,21 @@ public class WeaponManager : MonoBehaviour
             GameEvents.ChangeWeapon(currentWeapon);
 
         }
+        if (Keyboard.current.digit4Key.wasPressedThisFrame && isBazookaOpen)
+        {
+            lastWeapon = currentWeapon;
+            lastWeapon.SetActive(false);
+            currentWeapon = weaponArray[3];
+            currentWeapon.SetActive(true);
+            GameEvents.ChangeWeapon(currentWeapon);
+
+        }
 
     }
 
     private void OpenSniperRifle() => isSniperRifleOpen = true;
     private void OpenUzi() => isUziOpen = true;
+    private void OpenBazooka() => isBazookaOpen = true;
 
 
 

@@ -9,6 +9,7 @@ public class EffectManager : MonoBehaviour
     public bool isFrost;
     public bool isElectiricity;
     public bool isFire;
+    public bool isDark;
 
     public bool electricityControl = false;
 
@@ -49,7 +50,6 @@ public class EffectManager : MonoBehaviour
             case "Electric":
                 isElectiricity = true;
                 CheckEffects();
-                //ElectricMovementEffect();
                 Debug.Log("Enemy is electric");
                 break;
             case "Fire":
@@ -57,7 +57,8 @@ public class EffectManager : MonoBehaviour
                 Debug.Log("Enemy is fire");
                 break;
             case "Dark":
-                isFire = true;
+                isDark = true;
+                CheckEffects();
                 Debug.Log("Enemy is dark");
                 break;
             default:
@@ -72,6 +73,7 @@ public class EffectManager : MonoBehaviour
             StartFreeze();
         if (isWet && isElectiricity)
             electricityControl = true;
+        
     }
 
     public void StartElectricity()
