@@ -60,6 +60,8 @@ public class PlayerStatManager : MonoBehaviour, IDamageable
         if (playerData.exp >= playerData.maxExp)
         {
             GameEvents.LevelUp();
+            playerData.exp = 0;
+            playerData.maxExp += 20;
         }
     }
 

@@ -32,6 +32,50 @@ public class Attack : MonoBehaviour
 
     private void Shoot()
     {
+        if (currentWeapon.CompareTag("Uzi"))
+        {
+            if (Input.GetMouseButton(0))
+            {
+
+                currentWeapon.GetComponent<ParticleSystem>().Play();
+                Ray ray = new Ray(fpsCamera.transform.position, fpsCamera.transform.forward);
+                currentBulletIndex--;
+                if (Physics.Raycast(ray, out RaycastHit hit, range))
+                {
+                    Debug.Log($"vurulan obje {hit.collider.name}");
+                    if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable) &&
+                        hit.collider.TryGetComponent<EffectManager>(out EffectManager effectManager))
+                    {
+                        damageable.TakeDamage(playerData.damage);
+                        string currentBulletType = currentWeapon.GetComponent<BulletManager>().GetBulletType();
+                        effectManager.HitEffect(currentBulletType);
+                        if (currentWeapon.CompareTag("Bazooka"))
+                        {
+                            bazookaRocket.SetActive(true);
+                            bazookaRocket.transform.position = hit.collider.transform.position;
+                            Invoke("CloseRocket", 1f);
+                            Collider[] enemies = Physics.OverlapSphere(hit.transform.position, 5f);
+                            foreach (Collider c in enemies)
+                            {
+                                if (c.TryGetComponent<EffectManager>(out EffectManager manager))
+                                {
+                                    manager.HitEffect(currentBulletType);
+                                    Debug.Log("efekt uygulandı" + c.name);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (currentBulletIndex <= 0)
+                {
+                    Invoke("Reload", 2f);
+                }
+
+
+                Debug.Log("attack");
+
+            }
+        }
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             
@@ -86,7 +130,25 @@ public class Attack : MonoBehaviour
     private void Reload()
     {
         Debug.Log("Reloading");
-        currentBulletIndex = 7;
+        switch (currentWeapon.tag)
+        {
+            case "WaterGun":
+                currentBulletIndex = 7;
+                break;
+            case "SniperRifle":
+                currentBulletIndex = 5;
+                break;
+            case "Uzi":
+                currentBulletIndex = 20;
+                break;
+            case "Bazooka":
+                currentBulletIndex = 1;
+                break;
+            case "Shotgun":
+                currentBulletIndex = 3;
+                break;
+        }
+        
     }
 
 }

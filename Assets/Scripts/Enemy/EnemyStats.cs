@@ -23,11 +23,16 @@ public class EnemyStats : MonoBehaviour , IDamageable
         }
     }
 
+    public void SpawnStats()
+    {
+        currentHealth = maxHealth;
+    }
     
 
     private void Die()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         GameEvents.LowEnemyDeath(10f);
+        GameEvents.EnemyDied();
     }
 }

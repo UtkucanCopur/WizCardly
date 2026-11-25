@@ -12,7 +12,9 @@ public class GameEvents : MonoBehaviour
     public static event Action OnUziOpen;
     public static event Action OnFireRingOpen;
     public static event Action OnBazookaOpen;
+    public static event Action OnShotgunOpen;
     public static event Action OnMageEffectActive;
+    public static event Action OnEnemyDied;
 
 
 
@@ -31,7 +33,8 @@ public class GameEvents : MonoBehaviour
 
 
 
-
+    public static void EnemyDied() { OnEnemyDied?.Invoke(); }
+    public static void OpenShotgun() { OnShotgunOpen?.Invoke(); }
     public static void MageEffectActive() { OnMageEffectActive?.Invoke(); }
     public static void OpenBazooka() { OnBazookaOpen?.Invoke(); }
     public static void OpenFireRing() { OnFireRingOpen?.Invoke(); }
